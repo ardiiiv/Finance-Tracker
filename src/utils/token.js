@@ -5,3 +5,9 @@ export const generateToken = (user) => {
     expiresIn: process.env.JWT_EXPIRESIN,
   });
 };
+
+export const generateRefreshToken = (user) => {
+  return jwt.sign({ id: user.id }, process.env.JWT_REFRESH_TOKEN, {
+    expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRESIN,
+  });
+};
