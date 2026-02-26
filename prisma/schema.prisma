@@ -21,6 +21,7 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   refreshTokens RefreshToken[]
+  transaction   Transaction[]
 }
 
 model RefreshToken {
@@ -30,4 +31,19 @@ model RefreshToken {
   userId    String
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model Transaction {
+  id          String   @id @default(uuid())
+  amount      Float
+  type        String
+  category    String
+  description String?
+  date        DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
